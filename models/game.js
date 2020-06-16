@@ -8,11 +8,13 @@ class Game {
 
   addPlayerOne(socket, name) {
     this.playerOne = new Player(this, socket, name)
+    this.informPlayer(this.playerOne, GameLogic.instructionMsg)
     this.informPlayer(this.playerTwo, `${name} is connected.`)
   }
 
   addPlayerTwo(socket, name) {
     this.playerTwo = new Player(this, socket, name)
+    this.informPlayer(this.playerTwo, GameLogic.instructionMsg)
     this.informPlayer(this.playerOne, `${name} is connected.`)
   }
 
