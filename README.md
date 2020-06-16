@@ -77,13 +77,13 @@ ADD 1
   * Client commands `START` to play the game
 * For Automatic Mode
   * Open terminal for server
-  * Open terminal for client 1 then commands `AUTO`
-  * Open terminal for client 2 then commands `AUTO`
+  * Open terminal for client 1 then command `AUTO`
+  * Open terminal for client 2 then command `AUTO`
   * Game then will be start automatically
 * For Half-Manual Mode
   * Open terminal for server
-  * Open terminal for client 1 then commands `AUTO`
-  * Open terminal for client 2 then commands `START` to play the game
+  * Open terminal for client 1 then command `AUTO`
+  * Open terminal for client 2 then command `START` to play the game
 # 5. Limitations and Improvements
 ### Limitations
 ### Improvements
