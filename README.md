@@ -41,24 +41,24 @@ ADD 1
 * I started by developing the based client-server connection and handle disconnection from clients. Then I added some validations to make sure it suits the requirements.
 * Next, I created some objects for this application. I used a `Game` object to manage the state of the game, a `Player` object to save information of client. Besides, we need a `Game Logic` library to manage rules of a game. 
   * The `Game` object will let us know whether game was start or not, what is the initiate input, what is the current value, who is the next Turn.
-  * The `Player` object provides name, player's opponent,  playing options (manual, automatic)
-  * The `Game Logic` library manages rules of the Game. It is in charge of generating Random number, supplying numbers that players can add and some validations
-* Afterwards, I built a simple scenario when `both clients are manual` to understand the flow of events
+  * The `Player` object provides name, player's opponent,  playing options (manual, automatic).
+  * The `Game Logic` library manages rules of the Game. It is in charge of generating Random number, supplying numbers that players can add and some validations.
+* Afterwards, I built a simple scenario when `both clients are manual` to understand the flow of events.
 * Then I continued working with the scenario when `both clients are automatic` and when `one of clients plays automatically`.
-* When the application is worked. It's time to do some code refactor
+* When the application is worked. It's time to do some code refactor.
 # 2. Setup
 ### - Install NodeJS environment
 * For mac OS: Download the [macOS Installer] directly from the nodejs.org web site.
 * For Windows: Download the [Windows Installer] directly from the nodejs.org web site.
-* Open Terminal, command `node -v` and get response version of installed Node.js
+* Open Terminal, command `node -v` and get response version of installed Node.js.
 ### - Run Server/Clients
 * Download this repository from github
 * Decompress the file
-* Open Terminal and navigate to directory location, then run `node server.js` for starting server.
-* Open other Terminal and run `node client.js` for starting client connection.
+* Open Terminal and navigate to directory location, then run `node server.js` for starting server
+* Open other Terminal and run `node client.js` for starting client connection
 
 # 3. Game and Rules
-* Player is able to run some commands in Terminal
+* Player is able to run some commands in Terminal:
     * `START`: start the game
     * `QUIT`: quit the game
     * `ADD X`: add number X to get a valid number
@@ -66,14 +66,14 @@ ADD 1
     * `STATUS`: current Game information
     * Other command considering as an Invalid Command
 - Game is only start when one of connected client command `START`. If one of clients plays automatically, the right to start the game belongs to the opponent.
-- Game will be closed if one of clients disconnect from the server
+- Game will be closed if one of clients disconnect from the server.
 
 # 4. How to run the Game
 * For Manual Mode
   * Open terminal for server
   * Open terminal for client 1
   * Open terminal for client 2
-  * Client commands `START` to play the game.
+  * Client commands `START` to play the game
 * For Automatic Mode
   * Open terminal for server
   * Open terminal for client 1 then commands `AUTO`
@@ -82,7 +82,7 @@ ADD 1
 * For Half-Manual Mode
   * Open terminal for server
   * Open terminal for client 1 then commands `AUTO`
-  * Open terminal for client 2 then commands `START` to play the game.
+  * Open terminal for client 2 then commands `START` to play the game
 # 5. Limitations and Improvements
 ### Limitations
 ### Improvements
@@ -90,10 +90,10 @@ ADD 1
 # 6. References
 - [JavaScript Socket Programming Examples]
 - [Game of Three in Java] by Cristian Dugacicu
-- [Node Up an Running] by Tom Hughes-Croucher, Mike Wilson - Released April 2012, Publisher(s): O'Reilly Media, Inc.
+- [Node Up an Running] by Tom Hughes-Croucher, Mike Wilson - Released April 2012, Publisher(s): O'Reilly Media, Inc
 
 [JavaScript Socket Programming Examples]: <https://cs.lmu.edu/~ray/notes/jsnetexamples/>
 [Node Up an Running]: <https://www.oreilly.com/library/view/node-up-and/9781449332235/>
 [Game of Three in Java]: <https://github.com/razorcd/Game-of-Three>
- [Windows Installer]: <https://nodejs.org/en/#home-downloadhead>
- [macOS Installer]:<https://nodejs.org/en/#home-downloadhead>
+[Windows Installer]: <https://nodejs.org/en/#home-downloadhead>
+[macOS Installer]:<https://nodejs.org/en/#home-downloadhead>
