@@ -21,10 +21,11 @@ const instructionMsg = `
   == WELCOME TO GAME OF THREE. HOPE YOU HAVE GOOD TIME! ==.
   Here is something that you can do
   START: start the game
-  QUIT: quit the game
   ADD X: add number X to get a valid number
-  AUTO: player plays automatically. He then is not able to command unless disconnection
+  AUTO: play automatically. You are not able to use command unless disconnection
+  QUIT: quit the game
   STATUS: current Game information
+  CMD: Check list commands
   Other command considering as an Invalid Command
 `
 

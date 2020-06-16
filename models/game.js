@@ -8,13 +8,13 @@ class Game {
 
   addPlayerOne(socket, name) {
     this.playerOne = new Player(this, socket, name)
-    this.informPlayer(this.playerOne, GameLogic.instructionMsg)
+    this.informPlayer(this.playerOne, this.getGameInstruction())
     this.informPlayer(this.playerTwo, `${name} is connected.`)
   }
 
   addPlayerTwo(socket, name) {
     this.playerTwo = new Player(this, socket, name)
-    this.informPlayer(this.playerTwo, GameLogic.instructionMsg)
+    this.informPlayer(this.playerTwo, this.getGameInstruction())
     this.informPlayer(this.playerOne, `${name} is connected.`)
   }
 
@@ -107,6 +107,10 @@ class Game {
 
   getStatus() {
     return `Initiate Value: ${this.input}. Current value: ${this.roundValue}. Next Turn: ${this.nextTurn.name}`
+  }
+
+  getGameInstruction() {
+    return GameLogic.instructionMsg
   }
 }
 

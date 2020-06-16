@@ -51,6 +51,9 @@ class Player {
           game.startAutoMode(this, this.opponent)
         }
         break;
+      case 'CMD':
+        game.informPlayer(this, game.getGameInstruction())
+        break;
       default:
         this.invalidCommandMessage()
     }

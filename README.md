@@ -60,10 +60,11 @@ ADD 1
 # 3. Game and Rules
 * Player is able to run some commands in Terminal:
     * `START`: start the game
-    * `QUIT`: quit the game
     * `ADD X`: add number X to get a valid number
     * `AUTO`: player plays automatically. He then is not able to command unless disconnection
+    * `QUIT`: quit the game
     * `STATUS`: current Game information
+    * `CMD`: Check list commands
     * Other command considering as an Invalid Command
 - Game is only start when one of connected client command `START`. If one of clients plays automatically, the right to start the game belongs to the opponent.
 - Game will be closed if one of clients disconnect from the server.
