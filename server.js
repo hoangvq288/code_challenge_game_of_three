@@ -1,52 +1,52 @@
 const net = require('net');
-const Player = require('./models/player')
 const Game = require('./models/game')
-let clientList = []
+const Services = require('./services')
+const PORT_NUMBER = 9000
+
 let game = null
+
 const server = net.createServer((socket) => {
   const connection = `${socket.remoteAddress}:${socket.remotePort}`
-  console.log(`Opened connection ${connection}`);
+  Services.addInfo(`Opened connection ${connection}`);
   if(game === null) {
     // first connection
     game = new Game()
-    game.playerOne = new Player(game, socket, 'playerOne')
-    console.log('Player 1 connected to the game');
-  } else if (game.currentPlayers() < 2) {
-    // second connection
-    game.playerTwo = new Player(game, socket, 'playerTwo')
-    console.log('Player 2 connected to the game');
-    game.playerOne.send('Player 2 connected to the game')
-  } else {
+    game.addPlayerOne(socket, 'playerOne')
+    Services.addInfo(`${game.playerOne.name} connected to the game`);
+  } else if(game.isFull()) {
     // cannot accept third connection
-    console.log(`Closed connection ${connection}`);
+    Services.addWarning(`Closed connection ${connection}. Violate game rules.`)
     return socket.end('fs')
+  } else {
+    // second connection
+    if(game.playerOne) {
+      game.addPlayerTwo(socket, 'playerTwo')
+      Services.addInfo(`${game.playerTwo.name} connected to the game`);
+    } else {
+      game.addPlayerOne(socket, 'playerOne')
+      Services.addInfo(`${game.playerOne.name} connected to the game`);
+    }
   }
-  
 
   socket.on('end', () => {
-    console.log(`Closed connection ${connection}`);
-    if(game.playerOne.socket === socket) {
-      if(game.currentPlayers() == 1 ) {
-        console.log('All players left, close game');
-        game = null
-      } else {
-        console.log('Player 1 disconnected, Player 2 now become Player 1')
-        game.playerOne = game.playerTwo
-        game.playerOne.name = 'playerOne'
-        game.playerTwo = null
-        game.started = false
-        game.playerOne.send('Player 1 disconnected, you now become Player 1')
-      }
-    } else if (game.playerTwo.socket === socket) {
-      console.log('Player 2 disconnected')
-      game.playerOne.send('Player 2 disconnected')
-      game.playerTwo = null
-      game.isStarted = false
+    Services.addInfo(`Closed connection ${connection}`);
+    if(game.playerOne && game.playerOne.socket === socket) {
+      Services.addInfo(`${game.playerOne.name} disconnected from Server`)
+      game.informPlayer(game.playerTwo, `${game.playerOne.name} is disconnected`)
+      game.onDisconnect(game.playerOne)
+    } else {
+      Services.addInfo(`${game.playerTwo.name} disconnected from Server`)
+      game.informPlayer(game.playerOne, `${game.playerTwo.name} is disconnected`)
+      game.onDisconnect(game.playerTwo)
     }
-    
+    if(game.isEmpty()) {
+      Services.addInfo('All players left, close game.');
+      game = null
+    }
   });
-  
 });
 
 //server.maxConnections = 2;
-server.listen(9000);
+server.listen(PORT_NUMBER, () => {
+  Services.addInfo(`Started server for Game of Three PORT:${PORT_NUMBER}`)
+});

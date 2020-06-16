@@ -4,8 +4,11 @@ class Player {
     this.socket = socket
     this.name = name
     this.isManually = true
-    if(name === 'playerTwo') {
+    if(game.playerOne) {
       this.opponent = game.playerOne
+      this.opponent.opponent = this
+    } else if (game.playerTwo) {
+      this.opponent = game.playerTwo
       this.opponent.opponent = this
     }
     socket.on('data', (buffer) => {
@@ -71,8 +74,7 @@ class Player {
       this.send(`You added ${value}, the value now is ${game.roundValue}, Next turn: ${this.opponent.name}`)
       this.opponent.send(`${this.name} sent you the value ${game.roundValue}, choose one in [${GameLogic.options}] to send back`)
     }
-    if(this.isManually && !this.opponent.isManually) {
-      console.log('|Go to this line :>> ');
+    if(this.isManually && !this.opponent.isManually && !game.isFinish()) {
       this.opponent.playGame(game, this.opponent.guessValue(game.roundValue))
     }
   }

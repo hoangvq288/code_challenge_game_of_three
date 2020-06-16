@@ -1,7 +1,33 @@
 const GameLogic = require('../game_logic')
+const Player = require('./player')
 class Game {
   constructor() {
     this.name = 'Game of Three'
+    this.isStarted = false
+  }
+
+  addPlayerOne(socket, name) {
+    this.playerOne = new Player(this, socket, name)
+    this.informPlayer(this.playerTwo, `${name} is connected.`)
+  }
+
+  addPlayerTwo(socket, name) {
+    this.playerTwo = new Player(this, socket, name)
+    this.informPlayer(this.playerOne, `${name} is connected.`)
+  }
+
+  informPlayer(player, message ) {
+    if(player) {
+      player.send(message)
+    }
+  }
+
+  onDisconnect(player) {
+    if(player === this.playerOne) {
+      this.playerOne = null
+    } else {
+      this.playerTwo = null
+    }
     this.isStarted = false
   }
 
@@ -36,12 +62,10 @@ class Game {
   isFull() {
     return this.playerOne && this.playerTwo
   }
-  
-  currentPlayers() {
-    if(this.isFull()) return 2
-    return 1
-  }
 
+  isEmpty() {
+    return !this.playerOne && !this.playerTwo
+  }
   isValidNumber(value) {
     return GameLogic.options.includes(value) && GameLogic.isDivisible(this.roundValue + value)
   }
