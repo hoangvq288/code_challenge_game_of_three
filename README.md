@@ -27,7 +27,7 @@ START
 [Info] Game started by playerTwo, input number is 56, Next turn: playerOne
 [Info] playerOne sent you the value 19, choose one in [-1,0,1] to send back
 ADD -1
-You added -1, the value now is 6, Next turn: playerOne
+[Info] You added -1, the value now is 6, Next turn: playerOne
 [Info] playerOne sent you the value 2, choose one in [-1,0,1] to send back
 ADD 1
 [Info] You added 1 the value now is 1, you win. Game closed.
