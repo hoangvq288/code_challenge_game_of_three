@@ -84,9 +84,14 @@ ADD 1
   * Open terminal for server
   * Open terminal for client 1 then command `AUTO`
   * Open terminal for client 2 then command `START` to play the game
-# 5. Limitations and Improvements
+# 5. Limitations and Future improvements
 ### Limitations
-### Improvements
+* This application currently works on console using command line. I have no idea about transforming to web-based application.
+* In my opinion, if the application opens for more than two players, turn-based management is also an obstacle although we can custom Game Logic, Game Rules.
+* I cannot find a good approach for writing unit test, integration test.
+### Future improvements
+* Implement Log system for server to track all activities.
+* Writing Test
 
 # 6. References
 - [JavaScript Socket Programming Examples]
