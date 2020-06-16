@@ -33,7 +33,7 @@ ADD 1
 [Info] You added 1 the value now is 1, you win. Game closed.
 ```
 ### - Approach
-* I thought about socket.io at first. It requires frontend setup, however, which is not really neccessary for current application.
+* I thought about socket.io at first. It requires frontend setup, however, which is not really necessary for current application.
 * Afterwards I decided to write a simple server using `net` module in Node.js and then I use Telnet as a client to connect to the server.
 * Finally, I thought that the client should able to command to interact with application, therefore I built a simple Javascript with `readline` module in Node.js and consider it as client.
 
@@ -48,12 +48,41 @@ ADD 1
 * When the application is worked. It's time to do some code refactor
 # 2. Setup
 ### - Install NodeJS environment
-### - Run Server
-### - Run Client
+* For mac OS: Download the [macOS Installer] directly from the nodejs.org web site.
+* For Windows: Download the [Windows Installer] directly from the nodejs.org web site.
+* Open Terminal, command `node -v` and get response version of installed Node.js
+### - Run Server/Clients
+* Download this repository from github
+* Decompress the file
+* Open Terminal and navigate to directory location, then run `node server.js` for starting server.
+* Open other Terminal and run `node client.js` for starting client connection.
+
 # 3. Game and Rules
+* Player is able to run some commands in Terminal
+    * `START`: start the game
+    * `QUIT`: quit the game
+    * `ADD X`: add number X to get a valid number
+    * `AUTO`: player plays automatically. He then is not able to command unless disconnection
+    * `STATUS`: current Game information
+    * Other command considering as an Invalid Command
+- Game is only start when one of connected client command `START`. If one of clients plays automatically, the right to start the game belongs to the opponent.
+- Game will be closed if one of clients disconnect from the server
 
 # 4. How to run the Game
-
+* For Manual Mode
+  * Open terminal for server
+  * Open terminal for client 1
+  * Open terminal for client 2
+  * Client commands `START` to play the game.
+* For Automatic Mode
+  * Open terminal for server
+  * Open terminal for client 1 then commands `AUTO`
+  * Open terminal for client 2 then commands `AUTO`
+  * Game then will be start automatically
+* For Half-Manual Mode
+  * Open terminal for server
+  * Open terminal for client 1 then commands `AUTO`
+  * Open terminal for client 2 then commands `START` to play the game.
 # 5. Limitations and Improvements
 ### Limitations
 ### Improvements
@@ -66,3 +95,5 @@ ADD 1
 [JavaScript Socket Programming Examples]: <https://cs.lmu.edu/~ray/notes/jsnetexamples/>
 [Node Up an Running]: <https://www.oreilly.com/library/view/node-up-and/9781449332235/>
 [Game of Three in Java]: <https://github.com/razorcd/Game-of-Three>
+ [Windows Installer]: <https://nodejs.org/en/#home-downloadhead>
+ [macOS Installer]:<https://nodejs.org/en/#home-downloadhead>
