@@ -36,8 +36,12 @@ class Game {
     this.input = GameLogic.initRandomNumber()
     this.roundValue = this.input
     this.nextTurn = player.opponent
+    
+    this.informPlayer(player, `Game started by ${player.name}, input number is ${this.input}, Next turn: ${player.opponent.name}`)
+    this.informPlayer(player.opponent, `Game started by ${player.name}, input number is ${this.input}, Next turn: you`)
   }
-
+  
+  
   startAutoMode(player, playerOpponent) {
     this.startGame(player)
     let i = 0
@@ -55,8 +59,15 @@ class Game {
     }
   }
 
-  closeGame() {
+  closeGame(winPlayer, value) {
     this.isStarted = false
+    this.informPlayer(winPlayer, `You added ${value} the value now is ${this.roundValue}, you win. START to restart.`)
+    this.informPlayer(winPlayer.opponent, `${winPlayer.name} reached ${this.roundValue} first, so you lose. START to restart.`)
+  }
+
+  informState(currentPlayer, value) {
+    this.informPlayer(currentPlayer, `You added ${value}, the value now is ${this.roundValue}, Next turn: ${currentPlayer.opponent.name}`)
+    this.informPlayer(currentPlayer.opponent, `${currentPlayer.name} sent you the value ${this.roundValue}, choose one in [${GameLogic.options}] to send back`)
   }
 
   isFull() {

@@ -31,7 +31,7 @@ client.on('data', (buffer) => {
 
 rl.on('line', (line) => {
   if(!isManual) {
-    Services.addWarning('Cannot command while in Automation mode. Please quit and reconnect the server')
+    Services.addWarning('Cannot command in Auto Mode.')
   } else if(line) {
     client.write(`${line}\n`);
   }

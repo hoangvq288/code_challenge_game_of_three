@@ -1,9 +1,20 @@
 const GameLogic = require('../game_logic')
+const Services = require('../services')
 class Player {
   constructor(game, socket, name) {
     this.socket = socket
     this.name = name
     this.isManually = true
+    this.setOpponent(game)
+    
+    socket.on('data', (buffer) => {
+      const { command, value } = Services.handleCommand(buffer)
+      this.handleCommand(game, command, value)
+    })
+    
+  }
+
+  setOpponent(game) {
     if(game.playerOne) {
       this.opponent = game.playerOne
       this.opponent.opponent = this
@@ -11,12 +22,6 @@ class Player {
       this.opponent = game.playerTwo
       this.opponent.opponent = this
     }
-    socket.on('data', (buffer) => {
-      const commandInfo = buffer.toString('utf-8').trim().toUpperCase().split(' ');
-      const value = Number(commandInfo[1])
-      this.handleCommand(game, commandInfo[0], value)
-    })
-    this.send(`Welcome ${this.name}`)
   }
 
   handleCommand(game, command, value) {
@@ -29,10 +34,12 @@ class Player {
         break;
       case 'ADD':
         if(this.notAllowToPlay(game, value)) return this.send('You cannot use this command.')
+
         this.playGame(game, value)
         break;
       case 'STATUS':
         if(!game.isStarted) return this.send('Game did not start yet')
+
         this.send(game.getStatus())
         break;
       case 'AUTO':
@@ -50,14 +57,12 @@ class Player {
   }
 
   startGame(game) {
-    if(!game.isFull()) return this.send('Cannot start the game, you should wait one more person')
+    if(!game.isFull()) return this.send('Cannot start the game, you should wait one more person.')
     if(game.isStarted) {
       this.send('Game is already started')
       this.send(`Your opponent is: ${this.opponent.name}`)
     } else {
       game.startGame(this)
-      this.send(`Game started by ${this.name}, input number is ${game.input}, Next turn: ${this.opponent.name}`)
-      this.opponent.send(`Game started by ${this.name}, input number is ${game.input}, Next turn: you`)
       if(this.isManually && !this.opponent.isManually) {
         this.opponent.playGame(game, this.opponent.guessValue(game.input))
       }
@@ -66,14 +71,13 @@ class Player {
 
   playGame(game, value) {
     game.updateTurn(this, value)
+
     if(game.isFinish()) {
-      this.send(`You added ${value} the value now is ${game.roundValue}, you win. Game closed.`)  
-      this.opponent.send(`${this.name} reached ${game.roundValue} first, so you lose. Game closed.`)
-      game.closeGame()
+      game.closeGame(this, value)
     } else {
-      this.send(`You added ${value}, the value now is ${game.roundValue}, Next turn: ${this.opponent.name}`)
-      this.opponent.send(`${this.name} sent you the value ${game.roundValue}, choose one in [${GameLogic.options}] to send back`)
+      game.informState(this, value)
     }
+
     if(this.isManually && !this.opponent.isManually && !game.isFinish()) {
       this.opponent.playGame(game, this.opponent.guessValue(game.roundValue))
     }
