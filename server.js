@@ -44,6 +44,11 @@ const server = net.createServer((socket) => {
       game = null
     }
   });
+
+  socket.on('error', (err) => {
+    Services.addWarning(err)
+    Services.addWarning('Client should reconnect to play game.')
+  })
 });
 
 //server.maxConnections = 2;

@@ -1,6 +1,7 @@
 const GameLogic = require('../game_logic')
 const Player = require('./player')
 const { delayTime } = require('../services')
+const game_logic = require('../game_logic')
 class Game {
   constructor() {
     this.name = 'Game of Three'
@@ -19,7 +20,7 @@ class Game {
     this.informPlayer(this.playerOne, `${name} is connected.`)
   }
 
-  informPlayer(player, message ) {
+  informPlayer(player, message) {
     if(player) {
       player.send(message)
     }
@@ -47,7 +48,7 @@ class Game {
   
   async startAutoMode(player, playerOpponent) {
     this.startGame(player)
-    while(true) {
+    while(this.isFull()) {
       if(this.roundValue !== GameLogic.pivotNumber) {
         await delayTime(2)
         if(this.nextTurn == player) {
