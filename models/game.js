@@ -1,5 +1,6 @@
 const GameLogic = require('../game_logic')
 const Player = require('./player')
+const { delayTime } = require('../services')
 class Game {
   constructor() {
     this.name = 'Game of Three'
@@ -44,19 +45,18 @@ class Game {
   }
   
   
-  startAutoMode(player, playerOpponent) {
+  async startAutoMode(player, playerOpponent) {
     this.startGame(player)
-    let i = 0
-    while(i < 10) {
+    while(true) {
       if(this.roundValue !== GameLogic.pivotNumber) {
+        await delayTime(2)
         if(this.nextTurn == player) {
           player.playGame(this, player.guessValue(this.roundValue))
         } else {
           playerOpponent.playGame(this, playerOpponent.guessValue(this.roundValue))
         }
       } else {
-        i +=1
-        this.roundValue = GameLogic.initRandomNumber()
+        this.startGame(player)
       }
     }
   }

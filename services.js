@@ -14,8 +14,13 @@ const handleCommand = (buffer) => {
   }
 }
 
+const delayTime = (second) => {
+  return new Promise(done => setTimeout(() => done(), second * 1000)); 
+}
+
 module.exports = {
   addInfo,
   addWarning,
-  handleCommand
+  handleCommand,
+  delayTime
 }
