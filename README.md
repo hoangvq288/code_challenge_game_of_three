@@ -89,9 +89,11 @@ ADD 1
 * This application currently works on console using command line. I have no idea about transforming to web-based application.
 * In my opinion, if the application opens for more than two players, turn-based management is also an obstacle although we can custom Game Logic, Game Rules.
 * I cannot find a good approach for writing unit test, integration test.
+* This application only works for local environment. I tried deploy server in heroku and run client script but cannot get response from server due to PORT configuration. 
 ### Future improvements
 * Implement Log system for server to track all activities.
 * Writing Test
+* Use Websocket module and refactor code in order to work on production environment
 
 # 6. References
 - [JavaScript Socket Programming Examples]

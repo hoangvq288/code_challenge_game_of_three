@@ -4,7 +4,7 @@ const readline = require('readline');
 const rl = readline.createInterface({ input: process.stdin });
 
 const client = new net.Socket();
-const port = 9000
+const port = 8080
 let isManual = true
 
 client.connect(port, process.argv[2], () => {
