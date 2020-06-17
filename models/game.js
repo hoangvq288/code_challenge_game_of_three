@@ -64,8 +64,8 @@ class Game {
 
   closeGame(winPlayer, value) {
     this.isStarted = false
-    this.informPlayer(winPlayer, `You added ${value} the value now is ${this.roundValue}, you win. START to restart.`)
-    this.informPlayer(winPlayer.opponent, `${winPlayer.name} reached ${this.roundValue} first, so you lose. START to restart.`)
+    this.informPlayer(winPlayer, `You added ${value} the value now is ${this.roundValue}, you win. ${winPlayer.isManually ? 'START to restart.' : ''}`)
+    this.informPlayer(winPlayer.opponent, `${winPlayer.name} reached ${this.roundValue} first, so you lose. ${winPlayer.opponent.isManually ? 'START to restart.' : ''}`)
   }
 
   informState(currentPlayer, value) {
