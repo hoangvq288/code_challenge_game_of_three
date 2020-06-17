@@ -1,7 +1,7 @@
 const net = require('net');
 const Game = require('./models/game')
 const Services = require('./services')
-const PORT_NUMBER = 9000
+const PORT_NUMBER = process.env.PORT || 9000
 
 let game = null
 

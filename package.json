@@ -1,0 +1,23 @@
+{
+  "name": "gameofthree",
+  "version": "1.0.0",
+  "description": "* The Goal is to implement a game with two independent units – the players – communicating with each other using an API. * When a player starts, it incepts a random (whole) number and sends it to the second player as an approach of starting the game. The receiving player can now always choose between adding one of {1, 0, 1} to get to a number that is divisible by 3 . Divide it by three. The resulting whole number is then sent back to the original sender.The same rules are applied until one player reaches the number 1 (after the division). * For each \"move\", a sufficient output should get generated (mandatory: the added, and the resulting number). * Both players should be able to play automatically without user input. One of the players should optionally be adjustable by a user.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoangvq288/code_challenge_game_of_three.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoangvq288/code_challenge_game_of_three/issues"
+  },
+  "homepage": "https://github.com/hoangvq288/code_challenge_game_of_three#readme",
+  "dependencies": {
+    "jet": "^0.6.6-0"
+  }
+}
